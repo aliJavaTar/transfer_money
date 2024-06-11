@@ -3,6 +3,7 @@ package org.example.trasfer.domain;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,10 +29,7 @@ public class User {
         this.friends.add(user);
     }
 
-//    public void sendMoney(User user, Balance balance) {
-//        if (!this.balance.hasEnough(balance.getAmount())) {
-//            throw new IllegalArgumentException("you dont have enough money");
-//        }
-//
-//    }
+    public BigDecimal sendMoney(Balance balance, BigDecimal money) {
+        return this.balance.addAmount(balance, money);
+    }
 }

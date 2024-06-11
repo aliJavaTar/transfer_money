@@ -11,13 +11,13 @@ class BalanceShould {
     @Test
     void canAddAmountToBalance() {
 
-        Balance aliBalance = new Balance(new BigDecimal("100.00"));
+        Balance aliBalance = new Balance(new BigDecimal("100"));
 
         Balance yaserBalance = new Balance(new BigDecimal("20"));
 
         aliBalance.addAmount(yaserBalance, new BigDecimal("30"));
 
-        Assertions.assertEquals(yaserBalance.getAmount(), new BigDecimal("50"));
+        Assertions.assertEquals(new BigDecimal("50"), yaserBalance.getAmount());
     }
 
 }

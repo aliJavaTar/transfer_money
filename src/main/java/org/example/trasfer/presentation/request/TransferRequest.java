@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.trasfer.domain.Balance;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,5 +15,5 @@ import org.example.trasfer.domain.Balance;
 public class TransferRequest {
     private Long userId;
     private String Email;
-    private Balance amount;
+    private BigDecimal money;
 }

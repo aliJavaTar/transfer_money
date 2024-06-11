@@ -18,16 +18,23 @@ public class Balance {
 
 
     public BigDecimal addAmount(Balance balance, BigDecimal money) {
-        // * 5 % 100
-        BigDecimal divide = this.amount.multiply(new BigDecimal(5))
-                .divide(new BigDecimal(100), RoundingMode.HALF_UP);
 
-        if (!(divide.compareTo(balance.getAmount()) >= 0)) {
+        BigDecimal multiplyValue = this.amount.multiply(new BigDecimal(5));
+
+        BigDecimal divide = multiplyValue.divide(new BigDecimal(100), RoundingMode.HALF_UP);
+
+        BigDecimal afterSubtractFivePercentDivide = this.amount.subtract(divide);
+
+        if (!(afterSubtractFivePercentDivide.compareTo(balance.getAmount()) >= 0)) {
             throw new IllegalArgumentException("Cannot add an amount that isn't enough");
         }
-        BigDecimal moneyAdd = this.amount.subtract(money);
-        BigDecimal test = balance.amount.add(moneyAdd);
-        this.amount.subtract(divide);
-        return test;
+
+        BigDecimal afterSubtractMoneyTransferee = this.amount.subtract(money);
+
+        balance.amount = balance.amount.add(money);
+
+        this.amount = afterSubtractMoneyTransferee.subtract(afterSubtractFivePercentDivide);
+
+        return balance.amount;
     }
 }

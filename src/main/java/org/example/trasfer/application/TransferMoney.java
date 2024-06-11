@@ -5,6 +5,8 @@ import org.example.trasfer.domain.User;
 import org.example.trasfer.domain.Users;
 import org.example.trasfer.presentation.request.TransferRequest;
 
+import java.math.BigDecimal;
+
 public class TransferMoney {
     private final Users users;
 
@@ -12,7 +14,7 @@ public class TransferMoney {
         this.users = users;
     }
 
-    public void transferMoney(TransferRequest request) {
+    public BigDecimal transferMoney(TransferRequest request) {
         User user = users.findById(request.getUserId());
 
         User friend = users.findByEmail(request.getEmail())
@@ -22,6 +24,6 @@ public class TransferMoney {
             throw new InvalidRequestStateException("User is not friend");
         }
 
-//        user.sendMoney(friend, request.getAmount());
+        return user.sendMoney(friend.getBalance(), request.getMoney());
     }
 }
